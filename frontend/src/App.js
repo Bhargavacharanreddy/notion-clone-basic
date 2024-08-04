@@ -45,11 +45,11 @@ const App = () => {
     e.preventDefault();
     try {
       if (isNewUser) {
-        await axios.post('http://localhost:3001/api/register', { email, password });
+        await axios.post('http://localhost:6030/api/register', { email, password });
         setIsNewUser(false);
         setErrorMessage('Registration successful! Please log in.');
       } else if (isOtpSent) {
-        const response = await axios.post('http://localhost:3001/api/verify-otp', { email, otp });
+        const response = await axios.post('http://localhost:6030/api/verify-otp', { email, otp });
         if (response.data.success) {
           setErrorMessage('Login successful!');
           // Handle successful login (e.g., redirect to dashboard)
@@ -57,7 +57,7 @@ const App = () => {
           setErrorMessage('Invalid OTP. Please try again.');
         }
       } else {
-        const response = await axios.post('http://localhost:3001/api/login', { email });
+        const response = await axios.post('http://localhost:6030/api/login', { email });
         if (response.data.success) {
           setIsOtpSent(true);
           setErrorMessage('OTP sent to your email!');
@@ -78,7 +78,7 @@ const App = () => {
         width={window.innerWidth}
         height={window.innerHeight}
       >
-      
+      </canvas>
       <motion.div
         initial={{ y: -250, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -124,7 +124,7 @@ const App = () => {
           {isNewUser ? 'Back to Login' : 'New User? Register'}
         </button>
       </motion.div>
-      </canvas>
+      
     </div>
   );
 };
